@@ -27,8 +27,10 @@ class CheckRole extends BaseMiddleware
       $next($request);
     }
     $roles = explode('|', $role);
+    // dd($roles);
+    // dd($user['roles']['data']);
     foreach ($roles as $role) {
-      if (!in_array($role, $user['roles']['data'])) {
+      if (in_array($role, $user['roles']['data'])) {
         $this->saveSystemLogs($request);
         return $next($request);
       }
